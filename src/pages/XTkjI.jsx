@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 
 const XTkjI = ({ kelas }) => {
   return (
-    <div>
+    <div className="p-3">
       <h1 className="text-3xl font-bold text-center">Kelas 10 {kelas}</h1>
       <Link to="/" className="absolute top-2 left-2">
         <button className="p-3 bg-blue-200 rounded-full ">

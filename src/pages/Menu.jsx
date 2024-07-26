@@ -4,7 +4,7 @@ import { kelas } from "../constants/Kelas";
 
 const Menu = () => {
   return (
-    <div>
+    <div className="p-3">
       <h1 className="text-3xl font-bold">Menu ARCHIVE</h1>
       <div className="grid grid-cols-2 gap-5 mt-5">
         {kelas.map((kls) => (

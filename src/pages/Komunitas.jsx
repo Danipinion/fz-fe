@@ -35,11 +35,11 @@ const Komunitas = () => {
   });
 
   useEffect(() => {
-    if (chatContainerRef.current) {
+    if (chatContainerRef.current && data) {
       chatContainerRef.current.scrollTop =
         chatContainerRef.current.scrollHeight;
     }
-  }, [data, getMessage, sendMessage]); // Depend on `data` to trigger scroll when messages change
+  }, [data]); // Depend on `data` to trigger scroll when messages change
 
   if (error) {
     localStorage.removeItem("userId");
@@ -66,13 +66,14 @@ const Komunitas = () => {
     localStorage.removeItem("userId");
     navigate("/login");
   };
+
   return (
     <>
-      <div className="bg-blue-500 h-screen">
+      <div className="bg-blue-500 h-screen ">
         <h1 className="text-3xl font-bold py-5 text-center text-white">
           Komunitas
         </h1>
-        <div className="w-full px-5 chat-container" ref={chatContainerRef}>
+        <div className="w-full px-5 chat-container " ref={chatContainerRef}>
           <div className="chat-messages">
             {data.map((message, index) => (
               <div

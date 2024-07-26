@@ -6,3 +6,16 @@
 body {
   font-family: "Poppins", sans-serif;
 }
+.chat-container {
+  overflow-y: auto;
+  scroll-behavior: smooth;
+  height: 70vh; /* Atur sesuai dengan kebutuhan */
+  display: flex;
+  flex-direction: column;
+}
+
+.chat-messages {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}

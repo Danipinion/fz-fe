@@ -3,7 +3,6 @@ import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
 const Register = () => {
-  const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confPassword, setConfPassword] = useState("");
@@ -19,7 +18,7 @@ const Register = () => {
     e.preventDefault();
     setLoading(true);
     await instance.post("/users", {
-      name,
+      name: email,
       email,
       password,
       confPassword,
@@ -35,15 +34,6 @@ const Register = () => {
         </div>
         <div className="text-black">
           <form onSubmit={Auth} className="flex flex-col gap-2">
-            <div>
-              <input
-                type="text"
-                className="w-60 h-12 px-2 border-2 rounded-lg placeholder:text-sm"
-                placeholder="Username"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-              />
-            </div>
             <div>
               <input
                 type="text"

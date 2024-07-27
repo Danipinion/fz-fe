@@ -9,7 +9,7 @@ import ResponsiveWrapper from "../layouts/ResponsiveWrapper";
 const Komunitas = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { user, isError } = useSelector((state) => state.auth);
+  const { user } = useSelector((state) => state.auth);
   const [loading, setLoading] = useState(false);
   const chatContainerRef = useRef();
 
@@ -18,11 +18,11 @@ const Komunitas = () => {
   }, [dispatch]);
 
   useEffect(() => {
-    if (isError) {
-      console.log("Authentication error detected, redirecting to login...");
+    const userId = localStorage.getItem("userId");
+    if (userId) {
       navigate("/login");
     }
-  }, [isError, navigate]);
+  }, [navigate]);
 
   const [sendMessage, setSendMessage] = useState("");
 

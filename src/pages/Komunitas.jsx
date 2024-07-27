@@ -19,6 +19,7 @@ const Komunitas = () => {
 
   useEffect(() => {
     if (isError) {
+      console.log("Authentication error detected, redirecting to login...");
       navigate("/login");
     }
   }, [isError, navigate]);
@@ -42,8 +43,13 @@ const Komunitas = () => {
   }, [data]); // Depend on `data` to trigger scroll when messages change
 
   if (error) {
+    console.log(
+      "Error fetching messages, removing userId from local storage..."
+    );
     localStorage.removeItem("userId");
+    navigate("/login");
   }
+
   if (!data) return <h2>Loading...</h2>;
 
   const handleSendMessage = async () => {

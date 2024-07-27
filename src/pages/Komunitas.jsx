@@ -2,14 +2,14 @@ import { getMe } from "../hooks/AuthSlice";
 import instance from "../instance";
 import { useEffect, useState, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import useSWR, { mutate } from "swr";
 import ResponsiveWrapper from "../layouts/ResponsiveWrapper";
 
 const Komunitas = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { user } = useSelector((state) => state.auth);
+  const { user, isError, isLoading } = useSelector((state) => state.auth);
   const [loading, setLoading] = useState(false);
   const chatContainerRef = useRef();
 
@@ -18,11 +18,11 @@ const Komunitas = () => {
   }, [dispatch]);
 
   useEffect(() => {
-    const userId = localStorage.getItem("userId");
-    if (userId) {
+    if (isError) {
+      console.log("Authentication error detected, redirecting to login...");
       navigate("/login");
     }
-  }, [navigate]);
+  }, [isError, navigate]);
 
   const [sendMessage, setSendMessage] = useState("");
 
@@ -50,7 +50,7 @@ const Komunitas = () => {
     navigate("/login");
   }
 
-  if (!data) return <h2>Loading...</h2>;
+  if (isLoading || !data) return <h2>Loading...</h2>;
 
   const handleSendMessage = async () => {
     if (!sendMessage.trim()) {
@@ -70,6 +70,7 @@ const Komunitas = () => {
 
   const handleLogout = () => {
     localStorage.removeItem("userId");
+    dispatch(logout());
     navigate("/login");
   };
 
